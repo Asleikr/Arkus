@@ -50,7 +50,7 @@ module.exports = class messageCreate extends Event {
             timestamps.set(message.author.id, now);
             setTimeout(() => timestamps.delete(message.author.id), cdAmount);
             try {
-                await command.exec(message, args, data);
+                await command.executeCommand(message, args);
             } catch (err) {
                 this.client.logger.error(`An error occurred when trying to trigger MessageCreate event.\n\n${err}`, { tag: 'MessageError' });
                 return message.reply({ content: `Oops, it seems I got a critical error.` });
