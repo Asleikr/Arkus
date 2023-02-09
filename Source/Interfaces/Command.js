@@ -14,7 +14,7 @@ global.Command = module.exports = class Command {
         this.clientPerms = new Permissions(options.clientPerms).freeze();
     }
 
-    async exec(...args) {
+    async executeCommand(...args) {
         throw new Error(`${this.name} does not provide exec method !`);
     }
 }

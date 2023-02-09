@@ -7,19 +7,19 @@ const { name, version } = require('../../package.json');
 module.exports = class Logger {
     static log(content, { color = 'cyan', tag = 'Log' } = {}) {
         this.write(content, { color, tag });
-    }
+    };
 
     static like(content, { color = 'green', tag = 'Log' } = {}) {
         this.write(content, { color, tag });
-    }
+    };
 
     static warn(content, { color = 'orange', tag = 'Warn' } = {}) {
         this.write(content, { color, tag });
-    }
+    };
 
     static error(content, { color = 'red', tag = 'Error' } = {}) {
         this.write(content, { color, tag, error: true });
-    }
+    };
 
     static write(content, { color = 'grey', tag = 'Log', error = false } = {}) {
         const timestamp = chalk.bold.red(`${name}@${version} | [${moment().format('kk:mm')}]:`);
@@ -27,11 +27,11 @@ module.exports = class Logger {
         const text = chalk[color](this.clean(content));
         const stream = error ? process.stderr : process.stdout;
         stream.write(`${timestamp} ${levelTag} ${text}\n`);
-    }
+    };
 
     static clean(item) {
         if (typeof item === 'string') return item;
         const cleaned = util.inspect(item, { depth: Infinity });
         return cleaned;
-    }
-}
+    };
+};

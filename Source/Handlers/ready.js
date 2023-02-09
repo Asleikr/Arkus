@@ -5,8 +5,7 @@ module.exports = class Ready extends Event {
             once: false,
         });
     }
-    async exec() {
+    async executeHandler() {
         this.client.logger.log(`Connected into ${this.client.user.tag}`, { tag: 'Ready' });
-        await this.client.loadInteractions();
-    }
-}
+    };
+};

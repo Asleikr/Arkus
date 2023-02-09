@@ -1,4 +1,4 @@
-const { embed, removeDuplicates, formatPerms, formatArray } = require('../../utils/Utils');
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = class Ping extends Command {
     constructor() {
@@ -12,11 +12,11 @@ module.exports = class Ping extends Command {
             memberPerms: [],
             clientPerms: [],
         });
-    }
-    async exec(message, args, data) {
-        const emb = embed()
-            .setColor('2f3136')
+    };
+    async executeCommand(message) {
+        const emb = new EmbedBuilder()
+            .setColor("#2f3136")
             .setDescription(`Database: ${Math.round(await this.client.databasePing())}ms\nBot: ${Math.round(message.createdTimestamp - Date.now())}ms`);
         return message.channel.send({ embeds: [emb] });
-    }
-}
+    };
+};
