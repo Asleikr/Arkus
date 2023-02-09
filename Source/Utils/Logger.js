@@ -2,8 +2,14 @@ const moment = require('moment');
 const chalk = require('chalk');
 const util = require('util');
 
+const { name, version } = require('../../package.json');
+
 module.exports = class Logger {
-    static log(content, { color = 'blue', tag = 'Log' } = {}) {
+    static log(content, { color = 'cyan', tag = 'Log' } = {}) {
+        this.write(content, { color, tag });
+    }
+
+    static like(content, { color = 'green', tag = 'Log' } = {}) {
         this.write(content, { color, tag });
     }
 
@@ -16,7 +22,7 @@ module.exports = class Logger {
     }
 
     static write(content, { color = 'grey', tag = 'Log', error = false } = {}) {
-        const timestamp = chalk.cyan(`[${moment().format('DD-MM-YYYY kk:mm:ss')}]:`);
+        const timestamp = chalk.bold.red(`${name}@${version} | [${moment().format('kk:mm')}]:`);
         const levelTag = chalk.bold(`[${tag}]`);
         const text = chalk[color](this.clean(content));
         const stream = error ? process.stderr : process.stdout;
